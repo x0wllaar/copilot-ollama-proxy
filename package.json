@@ -1,0 +1,4 @@
+{
+  "name": "copilot-ollama-proxy",
+  "packageManager": "yarn@4.13.0"
+}
