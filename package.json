@@ -1,4 +1,15 @@
 {
-  "name": "copilot-ollama-proxy",
-  "packageManager": "yarn@4.13.0"
+	"name": "copilot-ollama-proxy",
+	"packageManager": "yarn@4.13.0",
+	"devDependencies": {
+		"@types/node": "^25.5.0",
+		"@typescript-eslint/eslint-plugin": "^8.57.2",
+		"@typescript-eslint/parser": "^8.57.2",
+		"esbuild": "^0.27.4",
+		"eslint": "^10.1.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-config-xo": "^0.51.0",
+		"prettier": "^3.8.1",
+		"typescript": "^6.0.0"
+	}
 }
