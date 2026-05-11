@@ -1,4 +1,9 @@
-import {handleVersion, handleTags, handleShow} from './handlers.js';
+import {
+	handleVersion,
+	handleTags,
+	handleShow,
+	handleGenerate,
+} from './handlers.js';
 import {handleProxy} from './proxy-handler.js';
 import type {FastifyInstance} from 'fastify';
 
@@ -104,6 +109,35 @@ export async function registerRoutes(
 			},
 		},
 		handleShow,
+	);
+
+	// 4. Generate a response
+	server.post(
+		'/api/generate',
+		{
+			schema: {
+				body: {
+					type: 'object',
+					required: ['model'],
+					properties: {
+						model: {type: 'string'},
+						prompt: {type: 'string'},
+						system: {type: 'string'},
+						stream: {type: 'boolean'},
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						keep_alive: {
+							oneOf: [{type: 'string'}, {type: 'number'}],
+						},
+						options: {
+							type: 'object',
+							additionalProperties: true,
+						},
+					},
+					additionalProperties: true,
+				},
+			},
+		},
+		handleGenerate,
 	);
 
 	// Default Proxy Route - forwards all other requests to LM Studio

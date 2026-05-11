@@ -17,6 +17,29 @@ export async function main(): Promise<number> {
 	// eslint-disable-next-line new-cap
 	const server = Fastify();
 
+	// Fallback JSON parser for requests that omit Content-Type: application/json
+	// (e.g. `curl -d`, which defaults to application/x-www-form-urlencoded).
+	// Real Ollama is permissive about this, so we mirror that behavior.
+	server.addContentTypeParser(
+		'*',
+		{parseAs: 'string'},
+		(_request, body: string, done) => {
+			const trimmed = body.trim();
+			if (trimmed === '') {
+				done(null, {});
+				return;
+			}
+
+			try {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+				const parsed = JSON.parse(trimmed);
+				done(null, parsed);
+			} catch (error) {
+				done(error as Error, undefined);
+			}
+		},
+	);
+
 	// Add request logging hook
 	addRequestLogging(server);
 

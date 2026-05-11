@@ -50,6 +50,94 @@ export type ShowModelRequestBody = {
 };
 
 /**
+ * Subset of generation options forwarded to LM Studio
+ */
+export type GenerateOptions = {
+	temperature?: number;
+	top_k?: number;
+	top_p?: number;
+	min_p?: number;
+	seed?: number;
+	stop?: string | string[];
+	num_ctx?: number;
+	num_predict?: number;
+};
+
+/**
+ * Request body for /api/generate endpoint
+ */
+export type GenerateRequestBody = {
+	model: string;
+	prompt?: string;
+	system?: string;
+	stream?: boolean;
+	options?: GenerateOptions;
+	keep_alive?: string | number;
+};
+
+/**
+ * Non-streaming response for /api/generate endpoint
+ */
+export type GenerateResponse = {
+	model: string;
+	created_at: string;
+	response: string;
+	done: boolean;
+	done_reason?: string;
+	prompt_eval_count?: number;
+	eval_count?: number;
+};
+
+/**
+ * Single ndjson event for streaming /api/generate responses
+ */
+export type GenerateStreamEvent = {
+	model: string;
+	created_at: string;
+	response: string;
+	done: boolean;
+	done_reason?: string;
+	prompt_eval_count?: number;
+	eval_count?: number;
+};
+
+/**
+ * LM Studio (OpenAI-compatible) chat completion response
+ */
+export type LmStudioChatCompletionResponse = {
+	id?: string;
+	model?: string;
+	choices?: Array<{
+		index?: number;
+		message?: {role?: string; content?: string};
+		finish_reason?: string;
+	}>;
+	usage?: {
+		prompt_tokens?: number;
+		completion_tokens?: number;
+		total_tokens?: number;
+	};
+};
+
+/**
+ * Single SSE chunk from LM Studio chat completion stream
+ */
+export type LmStudioChatCompletionChunk = {
+	id?: string;
+	model?: string;
+	choices?: Array<{
+		index?: number;
+		delta?: {role?: string; content?: string};
+		finish_reason?: string | null;
+	}>;
+	usage?: {
+		prompt_tokens?: number;
+		completion_tokens?: number;
+		total_tokens?: number;
+	};
+};
+
+/**
  * Model information response structure
  */
 export type ModelInfoResponse = {
