@@ -102,6 +102,22 @@ export type GenerateStreamEvent = {
 };
 
 /**
+ * LM Studio (OpenAI-compatible) chat completion request body
+ */
+export type LmStudioChatRequest = {
+	model: string;
+	messages: Array<{role: string; content: string}>;
+	stream: boolean;
+	temperature?: number;
+	top_p?: number;
+	top_k?: number;
+	min_p?: number;
+	seed?: number;
+	stop?: string | string[];
+	max_tokens?: number;
+};
+
+/**
  * LM Studio (OpenAI-compatible) chat completion response
  */
 export type LmStudioChatCompletionResponse = {

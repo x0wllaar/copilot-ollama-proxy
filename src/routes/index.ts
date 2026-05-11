@@ -1,9 +1,7 @@
-import {
-	handleVersion,
-	handleTags,
-	handleShow,
-	handleGenerate,
-} from './handlers.js';
+import {handleVersion} from './apihandlers/version.js';
+import {handleTags} from './apihandlers/tags.js';
+import {handleShow} from './apihandlers/show.js';
+import {handleGenerate} from './apihandlers/generate.js';
 import {handleProxy} from './proxy-handler.js';
 import type {FastifyInstance} from 'fastify';
 
