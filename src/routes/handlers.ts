@@ -44,7 +44,8 @@ export async function handleTags(
 			) {
 				for (const instance of lmModel.loaded_instances) {
 					// We use the instance ID as the model name in the list
-					ollamaModels.push({model: instance.id});
+					const modelSpec = {model: instance.id, name: instance.id};
+					ollamaModels.push(modelSpec);
 				}
 			}
 		}

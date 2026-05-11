@@ -32,6 +32,7 @@ export type LmStudioModelsResponse = {
  */
 export type OllamaModelEntry = {
 	model: string;
+	name: string;
 };
 
 /**

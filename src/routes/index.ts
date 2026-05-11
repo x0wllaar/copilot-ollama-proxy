@@ -43,6 +43,7 @@ export async function registerRoutes(
 									type: 'object',
 									properties: {
 										model: {type: 'string'},
+										name: {type: 'string'},
 									},
 								},
 							},
