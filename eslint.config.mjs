@@ -5,7 +5,13 @@ import eslintConfigPrettier from 'eslint-config-prettier/flat';
 const config = [
 	...eslintConfigXo(),
 	eslintConfigPrettier,
-	globalIgnores(['build/*', 'dist/*', '.pnp.cjs', '.pnp.loader.mjs']),
+	globalIgnores([
+		'build/*',
+		'dist/*',
+		'.pnp.cjs',
+		'.pnp.loader.mjs',
+		'.yarn/*',
+	]),
 ];
 
 export default config;
